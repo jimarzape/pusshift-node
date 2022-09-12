@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const cors = require('cors');
 const db = require('./config/db.js');
 
 var indexRouter = require('./routes/index');
@@ -15,6 +15,12 @@ var server = app.listen(process.env.PORT || 3001, () => {
   console.log('Server is started on 127.0.0.1:'+ (process.env.PORT || 3001))
 })
 
+var corsOptions = {
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+app.use(cors(corsOptions))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -27,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/reddit', redditRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

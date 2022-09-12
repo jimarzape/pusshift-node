@@ -17,15 +17,20 @@ module.exports.getSubmission = async (body) => {
             for(const child of children)
             {
                 let temp = []
-                
-                // return child.data.favorite;
                 const existPost = await db('submission')
                                         .where('reddit_id', child.data.id)
                                         .then(([reddit]) => {
                                             temp = reddit
                                         })
-                if(existPost)
+                                        
+                if(temp)
                 {
+                    temp.subreddit = child.data.subreddit;
+                    temp.title = child.data.title;
+                    temp.link = child.data.url;
+                    temp.ups = child.data.ups;
+                    temp.downs = child.data.downs;
+                    
                     const updatePost = await db('submission')
                                             .where('reddit_id', child.data.id)
                                             .update({
@@ -34,9 +39,10 @@ module.exports.getSubmission = async (body) => {
                                                 link : child.data.url,
                                                 ups : child.data.ups,
                                                 downs : child.data.downs
-                                            }).then(([reddit]) => {
-                                                temp = reddit
+                                            }).then(result => {
+                                                
                                             })
+                    
                 }
                 else{
                     temp = {
@@ -52,7 +58,7 @@ module.exports.getSubmission = async (body) => {
                                             .insert(temp)
                                             
                 }
-
+                
                 return_data.push(temp)
             }
            

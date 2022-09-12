@@ -3,7 +3,7 @@ var router = express.Router();
 const fetch = require('isomorphic-fetch');
 const redditController = require('../controllers/redditController')
 
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     redditController.getSubmission(req.body)
     .then(result => res.send(result))
     .catch(err => next(err))
