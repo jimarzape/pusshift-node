@@ -77,3 +77,13 @@ module.exports.toggleFavorite = async(body) => {
 
     return ({ status: 'success', message: 'User created successfully' });
 }
+
+module.exports.getFavorite = () => {
+    
+    return db.select('*')
+            .from('submission')
+            .where('favorite', true)
+            .then(submission => {
+                return submission
+            })
+}

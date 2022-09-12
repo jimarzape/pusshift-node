@@ -17,5 +17,11 @@ router.post('/favorite', function(req, res, next) {
     // res.send('respond with a resources');
 });
 
+router.get('/favorite/list', function(req, res, next) {
+    redditController.getFavorite()
+    .then(result => res.send(result))
+    .catch(err => next(err))
+    // res.send('respond with a resources');
+});
 
   module.exports = router;
