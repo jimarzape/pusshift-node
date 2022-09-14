@@ -75,7 +75,7 @@ module.exports.toggleFavorite = async(body) => {
                         favorite : body.favorite
                     })
 
-    return ({ status: 'success', message: 'User created successfully' });
+    return ({ status: 'success', message: 'Submission updated successfully.' });
 }
 
 module.exports.getFavorite = () => {
