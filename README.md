@@ -7,6 +7,9 @@ PASSWORD='password' <br />
 DB='database' <br />
 PORT=3001 <br />
 
+### Database ###
+PostgreSQL
+
 ## migration using knex ##
 run this command to migrate tables <br />
 `knex migrate:latest`
